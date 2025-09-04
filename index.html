@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mi página interactiva</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; transition: 0.3s; }
+    button { padding: 10px 20px; margin-top: 20px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; background: #4CAF50; color: white; }
+    button:hover { background: #45a049; }
+  </style>
+</head>
+<body>
+  <h1>¡Bienvenido a mi página interactiva! 🌍</h1>
+  <p id="mensaje">Haz clic en el botón para una sorpresa 🎉</p>
+  <button onclick="cambiarMensaje()">Haz clic aquí</button>
+
+  <script>
+    function cambiarMensaje() {
+      const mensajes = [
+        "¡Funciona! 🚀",
+        "¡Ya tienes tu propia web! 🎨",
+        "¡Esto es solo el comienzo! 😎",
+        "¡Sigue creando y sorprende! 💡"
+      ];
+      const mensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+      document.getElementById("mensaje").innerText = mensaje;
+      document.body.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    }
+  </script>
+</body>
+  </html>
