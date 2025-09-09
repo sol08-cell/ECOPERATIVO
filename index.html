@@ -1,71 +1,128 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ECOPERATIVO – Renueva · Reinventa · Revive</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --green:#2e7d32; --green-2:#1b5e20; --accent:#4caf50;
+      --bg:#f5fdf6; --text:#333;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    header{background:linear-gradient(180deg,rgba(46,125,50,.9),rgba(46,125,50,.7));color:#fff;text-align:center;padding:60px 20px}
+    header h1{margin:0;font-size:40px}
+    .tagline{font-weight:700;margin:8px 0}
+    nav{display:flex;gap:14px;justify-content:center;padding:12px;background:#fff;position:sticky;top:0;z-index:10}
+    nav a{color:var(--green);text-decoration:none;font-weight:600}
+    section{padding:32px 20px;max-width:1000px;margin:0 auto}
+    h2{text-align:center;color:var(--green-2)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.08);display:flex;flex-direction:column}
+    .card img{width:100%;height:160px;object-fit:cover}
+    .card h3{margin:10px;font-size:18px}
+    .card p{margin:0 10px 10px;font-size:14px;opacity:.85}
+    .card button{margin:10px;background:var(--accent);color:#fff;border:none;padding:10px;border-radius:10px;cursor:pointer;font-weight:700}
+    .benefits{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    .benefit{background:#fff;border-radius:12px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+    form{display:grid;gap:10px;max-width:500px;margin:20px auto}
+    input,textarea{padding:12px;border:1px solid #cfe6d1;border-radius:10px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    .ok{text-align:center;color:var(--green);font-weight:700;margin-top:8px}
+    footer{background:var(--green-2);color:#fff;text-align:center;padding:16px}
+    footer a{color:#a5d6a7;font-weight:700;text-decoration:none}
+  </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero__content">
-      <h1>ECOPERATIVO</h1>
-      <p class="tagline">“Renueva · Reinventa · Revive”</p>
-      <p class="desc">Innovación Sostenible en la Transformación de Residuos Plásticos y Más.</p>
-      <a href="#productos" class="btn">Ver productos</a>
-    </div>
+  <header>
+    <h1>ECOPERATIVO</h1>
+    <p class="tagline">Renueva · Reinventa · Revive</p>
+    <p>Innovación Sostenible en la Transformación de Residuos Plásticos y Más</p>
   </header>
 
-  <nav class="topnav">
+  <nav>
     <a href="#productos">Productos</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <main>
-    <!-- FILTRO / BUSCADOR -->
-    <section class="tools">
-      <input id="buscador" type="search" placeholder="Buscar producto..." />
-      <button class="btn btn-outline" id="limpiar">Limpiar</button>
-    </section>
+  <!-- PRODUCTOS -->
+  <section id="productos">
+    <h2>Nuestros productos</h2>
+    <div class="grid" id="gridProductos"></div>
+  </section>
 
-    <!-- PRODUCTOS -->
-    <section id="productos" class="section">
-      <h2>Nuestros productos</h2>
-      <div id="gridProductos" class="grid"></div>
-    </section>
+  <!-- NOSOTROS -->
+  <section id="nosotros">
+    <h2>¿Por qué ECOPERATIVO?</h2>
+    <div class="benefits">
+      <div class="benefit">♻️ Reutilizamos plásticos, tapas y materiales orgánicos.</div>
+      <div class="benefit">🌍 Diseños únicos con impacto positivo.</div>
+      <div class="benefit">💡 Hecho a mano, con amor por el planeta.</div>
+    </div>
+  </section>
 
-    <!-- NOSOTROS -->
-    <section id="nosotros" class="section section-alt">
-      <h2>¿Por qué ECOPERATIVO?</h2>
-      <div class="benefits">
-        <div class="benefit">♻️ Reutilizamos plásticos, tapas y materiales orgánicos.</div>
-        <div class="benefit">🌍 Diseños únicos con impacto positivo.</div>
-        <div class="benefit">💡 Hecho a mano, con amor por el planeta.</div>
-      </div>
-    </section>
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>¿Quieres cotizar por mayor o personalizar un pedido?</p>
+    <button class="btn" onclick="abrirWhatsApp()">Escríbenos por WhatsApp</button>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="section">
-      <h2>Contacto</h2>
-      <p>¿Quieres cotizar por mayor o personalizar un pedido?</p>
-      <a id="ctaWhats" class="btn" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    <form onsubmit="enviarFormulario(event)">
+      <input type="text" id="nombre" placeholder="Tu nombre" required />
+      <input type="email" id="email" placeholder="Tu correo" required />
+      <textarea id="mensaje" rows="4" placeholder="Cuéntanos tu idea..." required></textarea>
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+    <p id="respuestaForm" class="ok"></p>
+  </section>
 
-      <form class="contact-form" onsubmit="enviarFormulario(event)">
-        <input type="text" id="nombre" placeholder="Tu nombre" required />
-        <input type="email" id="email" placeholder="Tu correo" required />
-        <textarea id="mensaje" rows="4" placeholder="Cuéntanos tu idea..." required></textarea>
-        <button type="submit" class="btn">Enviar</button>
-      </form>
-      <p id="respuestaForm" class="ok"></p>
-    </section>
-  </main>
-
-  <footer class="footer">
+  <footer>
     <p>© 2025 ECOPERATIVO — Todos los derechos reservados.</p>
-    <p>Instagram: <a href="https://instagram.com/ecoperativo" target="_blank" rel="noopener">@ecoperativo</a></p>
+    <p>Instagram: <a href="https://instagram.com/ecoperativo" target="_blank">@ecoperativo</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    const PHONE = "5493875706236"; // WhatsApp
+
+    // Productos
+    const productos = [
+      {nombre:"Cuadro de flores con tapitas recicladas",descripcion:"Arte mural con flores hechas de tapitas reutilizadas, pintura y papel glase."},
+      {nombre:"Maceta orgánica biodegradable",descripcion:"Hechas con yerba reutilizada; ideales para cuidar tu plantita."},
+      {nombre:"Cuadro de barco con tapitas",descripcion:"Composición artística con tapitas reutilizadas y pintura."},
+      {nombre:"Mariquitas con tapitas",descripcion:"Trío de decoración hechos con tapas reutilizadas."},
+      {nombre:"Maceta rana reciclada",descripcion:"Macetero pintado a mano con forma de ranita."},
+      {nombre:"Flores para el pelo",descripcion:"Hermoso accesorio de flor hecha de plástico reciclado y palito broche para lucir en el cabello."},
+      {nombre:"Plantas carnívoras",descripcion:"Linda decoración de plantas carnívoras hechas de palito broche y tapas reutilizadas."}
+    ];
+
+    const grid=document.getElementById("gridProductos");
+    productos.forEach(p=>{
+      const card=document.createElement("div");
+      card.className="card";
+      card.innerHTML=`
+        <img src="https://via.placeholder.com/300x160?text=${encodeURIComponent(p.nombre)}" alt="${p.nombre}">
+        <h3>${p.nombre}</h3>
+        <p>${p.descripcion}</p>
+        <button onclick="consultarPrecio('${p.nombre}')">Consultar precio</button>
+      `;
+      grid.appendChild(card);
+    });
+
+    function consultarPrecio(nombre){
+      const txt=`¡Hola! Me interesa *${nombre}* de ECOPERATIVO. ¿Me compartes el precio y opciones de entrega?`;
+      const url=`https://wa.me/${PHONE}?text=${encodeURIComponent(txt)}`;
+      window.open(url,"_blank");
+    }
+    function abrirWhatsApp(){
+      window.open(`https://wa.me/${PHONE}`,"_blank");
+    }
+    function enviarFormulario(e){
+      e.preventDefault();
+      document.getElementById("respuestaForm").textContent="✅ ¡Gracias! Te responderemos pronto.";
+      e.target.reset();
+    }
+  </script>
 </body>
 </html>
